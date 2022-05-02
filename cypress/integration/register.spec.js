@@ -1,14 +1,13 @@
 describe("Teste do Cadastro do site BugBank", () => {
     const login = () => {
-        cy.get(".card__login input[name='email']").click().type("raro@raro.com");
-        cy.get(".card__login input[name='password']").click().type("1234");
+        cy.get(".card__login input[name='email']").type("raro@raro.com");
+        cy.get(".card__login input[name='password']").type("1234");
         cy.contains("button", "Acessar").click();
     };
 
     beforeEach(() => {
         cy.visit("");
         cy.contains("button", "Registrar").click();
-        cy.wait(2000);
     }); 
 
     it("Os campos nome, email, senha e confirmar senha são de preenchimento obrigatório", () => {
@@ -21,7 +20,6 @@ describe("Teste do Cadastro do site BugBank", () => {
         cy.get(".card__register input[name='password']").click({force: true}).type("1234");
         cy.get(".card__register input[name='passwordConfirmation']").click({force: true}).type("1234");
         cy.contains("button", "Cadastrar").click({force: true});
-        cy.wait(2000);
         cy.contains("#modalText", "Nome não pode ser vazio");
     });
 
@@ -30,7 +28,6 @@ describe("Teste do Cadastro do site BugBank", () => {
         cy.get(".card__register input[name='password']").click({force: true}).type("1234");
         cy.get(".card__register input[name='passwordConfirmation']").click({force: true}).type("1234");
         cy.contains("button", "Cadastrar").click({force: true});
-        cy.wait(2000);
         cy.contains("#modalText", "Email não pode ser vazio");
     });
 
@@ -39,7 +36,6 @@ describe("Teste do Cadastro do site BugBank", () => {
         cy.get(".card__register input[name='name']").click({force: true}).type("Raro");
         cy.get(".card__register input[name='passwordConfirmation']").click({force: true}).type("1234");
         cy.contains("button", "Cadastrar").click({force: true});
-        cy.wait(2000);
         cy.contains("#modalText", "Senha não pode ser vazio");
     });
 
@@ -48,7 +44,6 @@ describe("Teste do Cadastro do site BugBank", () => {
         cy.get(".card__register input[name='name']").click({force: true}).type("Raro");
         cy.get(".card__register input[name='password']").click({force: true}).type("1234");
         cy.contains("button", "Cadastrar").click({force: true});
-        cy.wait(2000);
         cy.contains("#modalText", "Confirmar senha não pode ser vazio");
     });
 
@@ -59,7 +54,6 @@ describe("Teste do Cadastro do site BugBank", () => {
         cy.get(".card__register input[name='passwordConfirmation']").click({force: true}).type("1234");
         cy.get("#toggleAddBalance").click({force: true});
         cy.contains("button", "Cadastrar").click({force: true});
-        cy.wait(2000);
         cy.get("#btnCloseModal").click();
 
         login();
@@ -72,7 +66,6 @@ describe("Teste do Cadastro do site BugBank", () => {
         cy.get(".card__register input[name='password']").click({force: true}).type("1234");
         cy.get(".card__register input[name='passwordConfirmation']").click({force: true}).type("1234");
         cy.contains("button", "Cadastrar").click({force: true});
-        cy.wait(2000);
         cy.get("#btnCloseModal").click();
 
         login();
@@ -85,7 +78,6 @@ describe("Teste do Cadastro do site BugBank", () => {
         cy.get(".card__register input[name='password']").click({force: true}).type("123");
         cy.get(".card__register input[name='passwordConfirmation']").click({force: true}).type("1234");
         cy.contains("button", "Cadastrar").click({force: true}); 
-        cy.wait(2000);
         cy.contains("#modalText", "As senhas não são iguais.");  
     });
 
@@ -95,7 +87,6 @@ describe("Teste do Cadastro do site BugBank", () => {
     //     cy.get(".card__register input[name='password']").click({force: true}).type("1234");
     //     cy.get(".card__register input[name='passwordConfirmation']").click({force: true}).type("1234");
     //     cy.contains("button", "Cadastrar").click({force: true});
-    //     cy.wait(2000);
     //     cy.contains("#modalText", "A conta XXX-X foi criada com sucesso");  
     // });
 });

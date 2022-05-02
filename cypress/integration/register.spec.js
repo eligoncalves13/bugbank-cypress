@@ -11,49 +11,49 @@ describe("Teste do Cadastro do site BugBank", () => {
     }); 
 
     it("Os campos nome, email, senha e confirmar senha são de preenchimento obrigatório", () => {
-        cy.contains("button", "Cadastrar").click({force: true});
+        cy.contains("button", "Cadastrar").click({ force: true });
         cy.get(".card__register .input__warging:contains('É campo obrigatório')").should('have.length', 4);
     });
 
     it("O campo nome não pode ser vazio", () => {
-        cy.get(".card__register input[name='email']").click({force: true}).type("raro@raro.com");
-        cy.get(".card__register input[name='password']").click({force: true}).type("1234");
-        cy.get(".card__register input[name='passwordConfirmation']").click({force: true}).type("1234");
-        cy.contains("button", "Cadastrar").click({force: true});
+        cy.get(".card__register input[name='email']").type("raro@raro.com", { force: true });
+        cy.get(".card__register input[name='password']").type("1234", { force: true });
+        cy.get(".card__register input[name='passwordConfirmation']").type("1234", { force: true });
+        cy.contains("button", "Cadastrar").click({ force: true });
         cy.contains("#modalText", "Nome não pode ser vazio");
     });
 
     it("O campo email não pode ser vazio", () => {
-        cy.get(".card__register input[name='name']").click({force: true}).type("Raro");
-        cy.get(".card__register input[name='password']").click({force: true}).type("1234");
-        cy.get(".card__register input[name='passwordConfirmation']").click({force: true}).type("1234");
-        cy.contains("button", "Cadastrar").click({force: true});
+        cy.get(".card__register input[name='name']").type("Raro", { force: true });
+        cy.get(".card__register input[name='password']").type("1234", { force: true });
+        cy.get(".card__register input[name='passwordConfirmation']").type("1234", { force: true });
+        cy.contains("button", "Cadastrar").click({ force: true });
         cy.contains("#modalText", "Email não pode ser vazio");
     });
 
     it("O campo senha não pode ser vazio", () => {
-        cy.get(".card__register input[name='email']").click({force: true}).type("raro@raro.com");
-        cy.get(".card__register input[name='name']").click({force: true}).type("Raro");
-        cy.get(".card__register input[name='passwordConfirmation']").click({force: true}).type("1234");
-        cy.contains("button", "Cadastrar").click({force: true});
+        cy.get(".card__register input[name='email']").type("raro@raro.com", { force: true });
+        cy.get(".card__register input[name='name']").type("Raro", { force: true });
+        cy.get(".card__register input[name='passwordConfirmation']").type("1234", { force: true });
+        cy.contains("button", "Cadastrar").click({ force: true });
         cy.contains("#modalText", "Senha não pode ser vazio");
     });
 
     it("O campo confirmar senha não pode ser vazio", () => {
-        cy.get(".card__register input[name='email']").click({force: true}).type("raro@raro.com");
-        cy.get(".card__register input[name='name']").click({force: true}).type("Raro");
-        cy.get(".card__register input[name='password']").click({force: true}).type("1234");
-        cy.contains("button", "Cadastrar").click({force: true});
+        cy.get(".card__register input[name='email']").type("raro@raro.com", { force: true });
+        cy.get(".card__register input[name='name']").type("Raro", { force: true });
+        cy.get(".card__register input[name='password']").type("1234", { force: true });
+        cy.contains("button", "Cadastrar").click({ force: true });
         cy.contains("#modalText", "Confirmar senha não pode ser vazio");
     });
 
     it("Deve ser possível criar conta com saldo", () => {
-        cy.get(".card__register input[name='email']").click({force: true}).type("raro@raro.com");
-        cy.get(".card__register input[name='name']").click({force: true}).type("Raro");
-        cy.get(".card__register input[name='password']").click({force: true}).type("1234");
-        cy.get(".card__register input[name='passwordConfirmation']").click({force: true}).type("1234");
-        cy.get("#toggleAddBalance").click({force: true});
-        cy.contains("button", "Cadastrar").click({force: true});
+        cy.get(".card__register input[name='email']").type("raro@raro.com", { force: true });
+        cy.get(".card__register input[name='name']").type("Raro", { force: true });
+        cy.get(".card__register input[name='password']").type("1234", { force: true });
+        cy.get(".card__register input[name='passwordConfirmation']").type("1234", { force: true });
+        cy.get("#toggleAddBalance").click({ force: true });
+        cy.contains("button", "Cadastrar").click({ force: true });
         cy.get("#btnCloseModal").click();
 
         login();
@@ -61,11 +61,11 @@ describe("Teste do Cadastro do site BugBank", () => {
     });
 
     it("Deve ser possível criar conta sem saldo", () => {
-        cy.get(".card__register input[name='email']").click({force: true}).type("raro@raro.com");
-        cy.get(".card__register input[name='name']").click({force: true}).type("Raro");
-        cy.get(".card__register input[name='password']").click({force: true}).type("1234");
-        cy.get(".card__register input[name='passwordConfirmation']").click({force: true}).type("1234");
-        cy.contains("button", "Cadastrar").click({force: true});
+        cy.get(".card__register input[name='email']").type("raro@raro.com", { force: true });
+        cy.get(".card__register input[name='name']").type("Raro", { force: true });
+        cy.get(".card__register input[name='password']").type("1234", { force: true });
+        cy.get(".card__register input[name='passwordConfirmation']").type("1234", { force: true });
+        cy.contains("button", "Cadastrar").click({ force: true });
         cy.get("#btnCloseModal").click();
 
         login();
@@ -73,20 +73,20 @@ describe("Teste do Cadastro do site BugBank", () => {
     });
 
     it("Não deve ser possível preencher os campos senha e confirmação de senha com dados diferentes", () => {
-        cy.get(".card__register input[name='email']").click({force: true}).type("raro@raro.com");
-        cy.get(".card__register input[name='name']").click({force: true}).type("Raro");
-        cy.get(".card__register input[name='password']").click({force: true}).type("123");
-        cy.get(".card__register input[name='passwordConfirmation']").click({force: true}).type("1234");
-        cy.contains("button", "Cadastrar").click({force: true}); 
+        cy.get(".card__register input[name='email']").type("raro@raro.com", { force: true });
+        cy.get(".card__register input[name='name']").type("Raro", { force: true });
+        cy.get(".card__register input[name='password']").type("123", { force: true });
+        cy.get(".card__register input[name='passwordConfirmation']").type("1234", { force: true });
+        cy.contains("button", "Cadastrar").click({ force: true }); 
         cy.contains("#modalText", "As senhas não são iguais.");  
     });
 
     // xit("Deve ser possível visualizar número da conta ao ser criada com sucesso", () => {
-    //     cy.get(".card__register input[name='email']").click({force: true}).type("raro@raro.com");
-    //     cy.get(".card__register input[name='name']").click({force: true}).type("Raro");
-    //     cy.get(".card__register input[name='password']").click({force: true}).type("1234");
-    //     cy.get(".card__register input[name='passwordConfirmation']").click({force: true}).type("1234");
-    //     cy.contains("button", "Cadastrar").click({force: true});
+    //     cy.get(".card__register input[name='email']").type("raro@raro.com", { force: true });
+    //     cy.get(".card__register input[name='name']").type("Raro", { force: true });
+    //     cy.get(".card__register input[name='password']").type("1234", { force: true });
+    //     cy.get(".card__register input[name='passwordConfirmation']").type("1234", { force: true });
+    //     cy.contains("button", "Cadastrar").click({ force: true });
     //     cy.contains("#modalText", "A conta XXX-X foi criada com sucesso");  
     // });
 });

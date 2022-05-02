@@ -81,12 +81,13 @@ describe("Teste do Cadastro do site BugBank", () => {
         cy.contains("#modalText", "As senhas não são iguais.");  
     });
 
-    // xit("Deve ser possível visualizar número da conta ao ser criada com sucesso", () => {
-    //     cy.get(".card__register input[name='email']").type("raro@raro.com", { force: true });
-    //     cy.get(".card__register input[name='name']").type("Raro", { force: true });
-    //     cy.get(".card__register input[name='password']").type("1234", { force: true });
-    //     cy.get(".card__register input[name='passwordConfirmation']").type("1234", { force: true });
-    //     cy.contains("button", "Cadastrar").click({ force: true });
-    //     cy.contains("#modalText", "A conta XXX-X foi criada com sucesso");  
-    // });
+    it("Deve ser possível visualizar número da conta ao ser criada com sucesso", () => {
+        cy.get(".card__register input[name='email']").type("raro@raro.com", { force: true });
+        cy.get(".card__register input[name='name']").type("Raro", { force: true });
+        cy.get(".card__register input[name='password']").type("1234", { force: true });
+        cy.get(".card__register input[name='passwordConfirmation']").type("1234", { force: true });
+        cy.contains("button", "Cadastrar").click({ force: true });
+        // cy.contains("#modalText", "A conta XXX-X foi criada com sucesso");  
+        cy.get("#modalText").should("include.text", "foi criada com sucesso");
+    });
 });

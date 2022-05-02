@@ -6,12 +6,12 @@ describe("Teste do Cadastro do site BugBank", () => {
     };
 
     beforeEach(() => {
-        cy.visit("https://bugbank.netlify.app/");
+        cy.visit("");
         cy.contains("button", "Registrar").click();
         cy.wait(2000);
     }); 
 
-    it("Os campos são de preenchimento obrigatório", () => {
+    it("Os campos nome, email, senha e confirmar senha são de preenchimento obrigatório", () => {
         cy.contains("button", "Cadastrar").click({force: true});
         cy.get(".card__register .input__warging:contains('É campo obrigatório')").should('have.length', 4);
     });

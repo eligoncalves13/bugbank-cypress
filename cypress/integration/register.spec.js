@@ -33,7 +33,7 @@ describe("Teste do Cadastro do site BugBank", () => {
             cy.get("input[name='passwordConfirmation']").type("1234", { force: true });
             cy.contains("button", "Cadastrar").click({ force: true });
         });
-        cy.contains("#modalText", "Nome não pode ser vazio").should("be.visible"); ;
+        cy.contains("#modalText", "Nome não pode ser vazio").should("be.visible");
     });
 
     it("O campo email não pode ser vazio", () => {
@@ -43,7 +43,7 @@ describe("Teste do Cadastro do site BugBank", () => {
             cy.get("input[name='passwordConfirmation']").type("1234", { force: true });
             cy.contains("button", "Cadastrar").click({ force: true });
         });
-        cy.contains("#modalText", "Email não pode ser vazio").should("be.visible"); ;
+        cy.contains("#modalText", "Email não pode ser vazio").should("be.visible"); 
     });
 
     it("O campo senha não pode ser vazio", () => {
@@ -53,7 +53,7 @@ describe("Teste do Cadastro do site BugBank", () => {
             cy.get("input[name='passwordConfirmation']").type("1234", { force: true });
             cy.contains("button", "Cadastrar").click({ force: true });
         });
-        cy.contains("#modalText", "Senha não pode ser vazio").should("be.visible"); ;
+        cy.contains("#modalText", "Senha não pode ser vazio").should("be.visible");
     });
 
     it("O campo confirmar senha não pode ser vazio", () => {
@@ -63,7 +63,7 @@ describe("Teste do Cadastro do site BugBank", () => {
             cy.get("input[name='password']").type("1234", { force: true });
             cy.contains("button", "Cadastrar").click({ force: true });
         });
-        cy.contains("#modalText", "Confirmar senha não pode ser vazio").should("be.visible"); ;
+        cy.contains("#modalText", "Confirmar senha não pode ser vazio").should("be.visible");
     });
 
     it("Deve ser possível criar conta com saldo", () => {
@@ -117,13 +117,25 @@ describe("Teste do Cadastro do site BugBank", () => {
         cy.contains("#modalText", /A conta [0-9][0-9][0-9]-[0-9] foi criada com sucesso/).should("be.visible"); 
     });
 
-    it("Deve ser possível fechar o modal de cadastro com sucesso com o botão fechar do header", () => {
+    it.only("Deve ser possível fechar o modal de cadastro com sucesso com o botão fechar do header", () => {
         cadastrarSemSaldo();
-        cy.contains("a[href='#']", "x").should("be.visible").click();
+        // cy.contains("a[href='#']", "x").should("be.visible").click();
+        cy.contains("a[href='#']", "x").should("be.visible");
+        cy.contains("a[href='#']", "x").click();
+        cy.contains("a[href='#']", "x").should("not.exist");
     });
     
     it("Deve ser possível fechar o modal de cadastro com sucesso com o botão fechar do footer", () => {
         cadastrarSemSaldo();
-        cy.contains("#btnCloseModal", "Fechar").should("be.visible").click(); 
+        // cy.contains("#btnCloseModal", "Fechar").should("be.visible").click(); 
+        
+        // cy.contains("#btnCloseModal", "Fechar").should("be.visible");
+        // cy.contains("#btnCloseModal", "Fechar").click();
+        // cy.contains("#btnCloseModal", "Fechar").should("not.exist");
+        cy.get("#btnCloseModal", "Fechar").within(() => {
+            cy.should("be.visible");
+            cy.click();
+            cy.should("not.exist");
+        });
     });
 });

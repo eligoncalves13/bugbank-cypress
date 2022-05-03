@@ -6,6 +6,15 @@ describe("Teste do Cadastro do site BugBank", () => {
             cy.contains("button", "Acessar").click();
         });
     };
+    const cadastrarSemSaldo = () => {
+        cy.get(".card__register").within(() => {
+            cy.get("input[name='email']").type("raro@raro.com", { force: true });
+            cy.get("input[name='name']").type("Raro", { force: true });
+            cy.get("input[name='password']").type("1234", { force: true });
+            cy.get("input[name='passwordConfirmation']").type("1234", { force: true });
+            cy.contains("button", "Cadastrar").click({ force: true });
+        });
+    };
 
     beforeEach(() => {
         cy.visit("");
@@ -24,7 +33,7 @@ describe("Teste do Cadastro do site BugBank", () => {
             cy.get("input[name='passwordConfirmation']").type("1234", { force: true });
             cy.contains("button", "Cadastrar").click({ force: true });
         });
-        cy.contains("#modalText", "Nome não pode ser vazio");
+        cy.contains("#modalText", "Nome não pode ser vazio").should("be.visible"); ;
     });
 
     it("O campo email não pode ser vazio", () => {
@@ -34,7 +43,7 @@ describe("Teste do Cadastro do site BugBank", () => {
             cy.get("input[name='passwordConfirmation']").type("1234", { force: true });
             cy.contains("button", "Cadastrar").click({ force: true });
         });
-        cy.contains("#modalText", "Email não pode ser vazio");
+        cy.contains("#modalText", "Email não pode ser vazio").should("be.visible"); ;
     });
 
     it("O campo senha não pode ser vazio", () => {
@@ -44,7 +53,7 @@ describe("Teste do Cadastro do site BugBank", () => {
             cy.get("input[name='passwordConfirmation']").type("1234", { force: true });
             cy.contains("button", "Cadastrar").click({ force: true });
         });
-        cy.contains("#modalText", "Senha não pode ser vazio");
+        cy.contains("#modalText", "Senha não pode ser vazio").should("be.visible"); ;
     });
 
     it("O campo confirmar senha não pode ser vazio", () => {
@@ -54,7 +63,7 @@ describe("Teste do Cadastro do site BugBank", () => {
             cy.get("input[name='password']").type("1234", { force: true });
             cy.contains("button", "Cadastrar").click({ force: true });
         });
-        cy.contains("#modalText", "Confirmar senha não pode ser vazio");
+        cy.contains("#modalText", "Confirmar senha não pode ser vazio").should("be.visible"); ;
     });
 
     it("Deve ser possível criar conta com saldo", () => {
@@ -86,7 +95,7 @@ describe("Teste do Cadastro do site BugBank", () => {
         cy.contains("#textBalance", "Saldo em conta R$ 0,00");     
     });
 
-    it.only("Não deve ser possível preencher os campos senha e confirmação de senha com dados diferentes", () => {
+    it("Não deve ser possível preencher os campos senha e confirmação de senha com dados diferentes", () => {
         cy.get(".card__register").within(() => {
             cy.get("input[name='email']").type("raro@raro.com", { force: true });
             cy.get("input[name='name']").type("Raro", { force: true });
@@ -106,5 +115,15 @@ describe("Teste do Cadastro do site BugBank", () => {
             cy.contains("button", "Cadastrar").click({ force: true });
         });
         cy.contains("#modalText", /A conta [0-9][0-9][0-9]-[0-9] foi criada com sucesso/).should("be.visible"); 
-    });   
+    });
+
+    it("Deve ser possível fechar o modal de cadastro com sucesso com o botão fechar do header", () => {
+        cadastrarSemSaldo();
+        cy.contains("a[href='#']", "x").should("be.visible").click();
+    });
+    
+    it("Deve ser possível fechar o modal de cadastro com sucesso com o botão fechar do footer", () => {
+        cadastrarSemSaldo();
+        cy.contains("#btnCloseModal", "Fechar").should("be.visible").click(); 
+    });
 });

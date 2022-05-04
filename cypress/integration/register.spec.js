@@ -117,25 +117,17 @@ describe("Teste do Cadastro do site BugBank", () => {
         cy.contains("#modalText", /A conta [0-9][0-9][0-9]-[0-9] foi criada com sucesso/).should("be.visible"); 
     });
 
-    it.only("Deve ser possível fechar o modal de cadastro com sucesso com o botão fechar do header", () => {
+    it("Deve ser possível fechar o modal de cadastro com sucesso com o botão fechar do header", () => {
         cadastrarSemSaldo();
-        // cy.contains("a[href='#']", "x").should("be.visible").click();
-        cy.contains("a[href='#']", "x").should("be.visible");
-        cy.contains("a[href='#']", "x").click();
-        cy.contains("a[href='#']", "x").should("not.exist");
+        cy.contains("#btnCloseModal", "Fechar").should("be.visible");
+        cy.contains("#btnCloseModal", "Fechar").click();
+        cy.contains("#btnCloseModal", "Fechar").should("not.exist");
     });
     
-    it("Deve ser possível fechar o modal de cadastro com sucesso com o botão fechar do footer", () => {
+    it.only("Deve ser possível fechar o modal de cadastro com sucesso com o botão fechar do footer", () => {
         cadastrarSemSaldo();
-        // cy.contains("#btnCloseModal", "Fechar").should("be.visible").click(); 
-        
-        // cy.contains("#btnCloseModal", "Fechar").should("be.visible");
-        // cy.contains("#btnCloseModal", "Fechar").click();
-        // cy.contains("#btnCloseModal", "Fechar").should("not.exist");
-        cy.get("#btnCloseModal", "Fechar").within(() => {
-            cy.should("be.visible");
-            cy.click();
-            cy.should("not.exist");
-        });
+        cy.contains("#btnCloseModal", "Fechar").should("be.visible");
+        cy.contains("#btnCloseModal", "Fechar").click();
+        cy.contains("#btnCloseModal", "Fechar").should("not.exist");
     });
 });

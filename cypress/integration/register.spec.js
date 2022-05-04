@@ -1,3 +1,5 @@
+import { registerPage } from "../../support/pages/RegisterPage.po";
+
 describe("Teste do Cadastro do site BugBank", () => {
     const login = () => {
         cy.get(".card__login").within(() => {

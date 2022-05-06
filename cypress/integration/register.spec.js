@@ -1,14 +1,7 @@
 import { registerPage } from "../support/pages/RegisterPage.po";
+import { loginPage } from "../support/pages/LoginPage.po"
 
 describe("Teste do Cadastro do site BugBank", () => {
-    const login = () => {
-        cy.get(".card__login").within(() => {
-            cy.get("input[name='email']").type("raro@raro.com");
-            cy.get("input[name='password']").type("1234");
-            cy.contains("button", "Acessar").click();
-        });
-    };
-    
     beforeEach(() => {
         registerPage.visitar();
         registerPage.abrirFormularioCadastro();
@@ -57,7 +50,8 @@ describe("Teste do Cadastro do site BugBank", () => {
         registerPage.confirmarFormulario();
         registerPage.fecharModalDeContaCriada("#btnCloseModal", "Fechar");
 
-        login();
+        loginPage.preencherFormulario("raro@raro.com", "1234")
+        loginPage.confirmarFormulario();
         registerPage.verificarTextoDeSaldo("1.000,00");
 
     });
@@ -67,7 +61,8 @@ describe("Teste do Cadastro do site BugBank", () => {
         registerPage.confirmarFormulario();
         registerPage.fecharModalDeContaCriada("#btnCloseModal", "Fechar");
 
-        login();
+        loginPage.preencherFormulario("raro@raro.com", "1234")
+        loginPage.confirmarFormulario();
         registerPage.verificarTextoDeSaldo("0,00");   
     });
 

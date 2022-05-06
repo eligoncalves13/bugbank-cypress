@@ -1,0 +1,8 @@
+{
+    "name": "Raro", 
+    "email": "raro@raro.com", 
+    "password": "1234", 
+    "accountNumber": "588-4", 
+    "balance": 1000,
+    "logged": false
+}
